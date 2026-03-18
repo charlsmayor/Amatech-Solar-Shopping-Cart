@@ -3,15 +3,13 @@ name: Build APK
 on:
   push:
     branches: [ main ]
-  pull_request:
-    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
@@ -25,7 +23,10 @@ jobs:
         pip install -r requirements.txt
 
     - name: Setup Android SDK
-      uses: android-actions/setup-android@v2
+      uses: android-actions/setup-android@v3
+      with:
+        api-level: 31
+        build-tools-version: 31.0.0
 
     - name: Build APK
       run: |
